@@ -1,9 +1,9 @@
 import {nameData} from './data/name-data.js';
 
-export const namegen = { generate, init };
+export const perdag = { generate, init };
 
 function generate(options) {
-	var data = [];
+	let data = [];
 
 	for (let i = 0; i < options.number; i++) {
 		let person = {};
@@ -19,7 +19,7 @@ function generate(options) {
 
 function generateName(which, sex) {
 	const haystack = nameData[sex][which];
-	var needle;
+    let needle;
 
 	while (!needle) {
 		let p = Math.random() / 100;
@@ -35,9 +35,9 @@ function generateName(which, sex) {
 
 function init() {
 	Object.keys(nameData).forEach(key1 => {
-		var level1 = nameData[key1];
+        let level1 = nameData[key1];
 		Object.keys(level1).forEach(key2 => {
-			var level2 = level1[key2];
+            let level2 = level1[key2];
 			countDictionaryTotal(level2);
 		});
 	});

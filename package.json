@@ -2,6 +2,7 @@
   "name": "perdag",
   "version": "1.0.0",
   "description": "Random personal data generator",
+  "repository": "https://github.com/arusak/perdag.git",
   "main": "perdag.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
