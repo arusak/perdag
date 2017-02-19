@@ -1,0 +1,13 @@
+{
+  "name": "perdag",
+  "version": "1.0.0",
+  "description": "Random personal data generator",
+  "main": "perdag.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "anton.rusak@gmail.com",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": { }
+}
