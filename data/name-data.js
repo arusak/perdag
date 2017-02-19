@@ -3,7 +3,7 @@ import {femalesMiddle} from './females-middle.js';
 import {femalesLast} from './females-last.js';
 import {malesFirst} from './males-first.js';
 import {malesMiddle} from './males-middle.js';
-import {malesLast} from './males-last.js	';
+import {malesLast} from './males-last.js';
 
 export const nameData = {
 	females: {
