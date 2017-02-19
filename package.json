@@ -1,6 +1,6 @@
 {
   "name": "perdag",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Random personal data generator",
   "repository": "https://github.com/arusak/perdag.git",
   "main": "perdag.js",
