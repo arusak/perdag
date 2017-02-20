@@ -3,16 +3,32 @@ import {nameData} from './data/name-data.js';
 export const perdag = {generate};
 let initialized = false;
 
+const EPOCH_FIRST_YEAR = (new Date(0)).getYear();
+const SECONDS_IN_YEAR = 31536000;
+const SECONDS_IN_DAY = 86400;
+const DAYS_IN_YEAR = 365; // забиваем на високосные
+
+class Person {
+	get shortName() {
+		return `${this.lastName} ${this.firstName.charAt(0)}. ${this.middleName.charAt(0)}.`;
+	}
+
+	get fullName() {
+		return `${person.last} ${person.first} ${person.middle}`;
+	}
+}
+
 function generate(options = {number: 1}) {
 	let data = [];
 
 	if (!initialized) init();
 
 	for (let i = 0; i < options.number; i++) {
-		let person = {};
-		let sex = options.sex || (Math.random() < 0.5 ? 'males' : 'females');
+		let person = new Person();
 
-		['last', 'first', 'middle'].forEach(nameType => person[nameType] = generateName(nameType, sex));
+		person.sex = options.sex || (Math.random() < 0.5 ? 'males' : 'females');
+
+		['last', 'first', 'middle'].forEach(field => person[field + 'Name'] = generateName(field, person.sex));
 		person.homePhone = generatePhone('495');
 		person.cellPhone = generatePhone('9');
 
@@ -31,7 +47,7 @@ function generateName(which, sex) {
 	while (!needle) {
 		let p = Math.random() / 100;
 		let randomItemNumber = Math.floor(Math.random() * haystack.length);
-		console.log(p, haystack[randomItemNumber].c, haystack.total, haystack[randomItemNumber].c / haystack.total);
+		// console.log(p, haystack[randomItemNumber].c, haystack.total, haystack[randomItemNumber].c / haystack.total);
 		if (haystack[randomItemNumber].c / haystack.total > p) {
 			needle = haystack[randomItemNumber];
 		}
@@ -60,8 +76,11 @@ function generateBirthDate() {
 	// тупо считаем, что у нас всех возрастов поровну
 	let age = Math.floor((Math.random() * (maxAge - minAge)) + minAge);
 	let today = new Date();
-	// немного дурацкий алгоритм, из-за переполнений вероятность даты 1 мая, 1 декабря и пр. в 2 раза больше
-	return new Date(today.getFullYear() - age, Math.floor(Math.random() * 12) + 1, Math.floor(Math.random() * 31) + 1)
+
+	let birthYearToEpoch = today.getYear() - age - EPOCH_FIRST_YEAR;
+	let secondsOfBirth = birthYearToEpoch * SECONDS_IN_YEAR + Math.random() * DAYS_IN_YEAR * SECONDS_IN_DAY;
+
+	return new Date(secondsOfBirth * 1000);
 }
 
 function generateRandomDigit() {
